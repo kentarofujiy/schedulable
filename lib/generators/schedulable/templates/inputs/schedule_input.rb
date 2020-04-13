@@ -91,6 +91,10 @@ class ScheduleInput < SimpleForm::Inputs::Base
           b.input :time, date_options.merge({as: input_types[:time]})
         end << 
         
+         template.content_tag("div", data: {group: 'singular,daily,weekly,monthly'}) do
+          b.input :endtime, date_options.merge({as: input_types[:time]})
+        end << 
+        
         (if input_options[:interval]
           template.content_tag("div", data: {group: 'daily,weekly,monthly'}) do
             b.input :interval

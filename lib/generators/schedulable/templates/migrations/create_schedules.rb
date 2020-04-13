@@ -6,6 +6,8 @@ class CreateSchedules < ActiveRecord::Migration
       t.date :date
       t.time :time
       
+      t.time :endtime
+      
       t.string :rule
       t.string :interval
       

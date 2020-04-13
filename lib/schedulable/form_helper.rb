@@ -171,6 +171,13 @@ module Schedulable
               content_wrap(@template, f.send(input_types[:time].to_sym, *[:time].concat(f.method(input_types[:time].to_sym).parameters.count >= 3 ? [date_options] : []).concat([style_options[:date_select_html].clone])), style_options[:date_select_wrapper])
             end <<
             
+             # Endime Select
+            @template.content_tag("div", style_options[:field_html].merge({data: {group: 'singular,daily,weekly,monthly'}})) do
+              content_wrap(@template, f.label(:endtime, style_options[:label_html]), style_options[:label_wrapper]) <<
+              #content_wrap(@template, f.send(input_types[:time].to_sym, *[:endtime].concat(f.method(input_types[:time].to_sym).parameters.count >= 3 ? [date_options] : []).concat([style_options[:date_select_html].clone])), style_options[:date_select_wrapper])
+              content_wrap(@template, f.time_field(:endtime, style_options[:date_select_html]), style_options[:date_select_html])
+            end <<
+            
             # Optional Fields...
             
             # Interval Number Field

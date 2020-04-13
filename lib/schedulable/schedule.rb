@@ -24,7 +24,7 @@ module Schedulable
         message = ""
         if self.rule == 'singular'
           # Return formatted datetime for singular rules
-          datetime = DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
+          datetime = DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone, endtime.hour, endtime.min, endtime.sec, endtime.zone)
           message = I18n.localize(datetime)
         else
           # For other rules, refer to icecube
@@ -47,7 +47,7 @@ module Schedulable
       end
 
       def self.param_names
-        [:id, :date, :time, :rule, :until, :count, :interval, day: [], day_of_week: [monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: []]]
+        [:id, :date, :time, :endtime, :rule, :until, :count, :interval, day: [], day_of_week: [monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: []]]
       end
 
       def update_schedule()
@@ -62,6 +62,13 @@ module Schedulable
         end
         time_string = time.strftime("%d-%m-%Y %I:%M %p")
         time = Time.zone.parse(time_string)
+        
+        endtime = Date.today.to_time(:utc)
+        if self.endtime.present?
+          endtime = endtime + self.endtime.seconds_since_midnight.seconds
+        end
+        endtime_string = endtime.strftime("%d-%m-%Y %I:%M %p")
+        endtime = Time.zone.parse(endtime_string)
 
         @schedule = IceCube::Schedule.new(time)
 

@@ -6,7 +6,7 @@ if Rails.env != 'production'
 
   # Users
   1.times do
-    FactoryGirl.create :event
+    FactoryBot.create :event
   end
 
   # ...

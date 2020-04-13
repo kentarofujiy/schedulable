@@ -113,7 +113,10 @@ module Schedulable
                 t = schedule.time
                 dt = d + t.seconds_since_midnight.seconds   
                 singular_date_time = (d + t.seconds_since_midnight.seconds).to_datetime
-                occurrences = [singular_date_time]
+                # get end time
+                e = schedule.endtime
+                singular_end_time = e
+                occurrences = [singular_date_time, singular_end_time]
               end
   
               # Build occurrences

@@ -7,7 +7,7 @@ class SchedulableTest < ActiveSupport::TestCase
   DatabaseCleaner.clean_with(:truncation)
   DatabaseCleaner.start
   
-  event = FactoryGirl.create(:event)
+  event = FactoryBot.create(:event)
   puts event.name
 
   test "truth" do
